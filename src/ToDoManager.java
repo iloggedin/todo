@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class ToDoManager extends CompletionToDo {
+public class ToDoManager {
 
     public ArrayList<String> todos = new ArrayList<>();
     Scanner sc = new Scanner(System.in);
@@ -26,21 +26,26 @@ public class ToDoManager extends CompletionToDo {
 
 
     public void completed(){
-        System.out.println("what task did you complete?");
-        char answer = sc.next().charAt(0);
-        if(answer == 'y'){
-            Boolean done = true;
-
+        System.out.println("what task did you complete?: ");
+        boolean done;
+        String answer = sc.nextLine();
+        if(todos.contains(answer)){
+            done = true;
+            todos.remove(answer);
+        }
+        else {
+            System.out.println("that is not a todo");
+            completed();
         }
     }
 
     public void Menu(){
-        System.out.println("choose a number from one of the following things you want to do: \n1: Add\n2: Display\n3: Remove");
+        System.out.println("choose a number from one of the following things you want to do: \n1: Add\n2: Display\n3: Check off");
         int number = sc.nextInt();
         switch (number) {
             case 1 -> add();
             case 2 -> display();
-            case 3 -> check();
+            case 3 -> completed();
         }
 
     }
